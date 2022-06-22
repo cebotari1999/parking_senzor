@@ -23,9 +23,6 @@ void setup() {
  // Initialize the LCD
   analogWrite(9, contrast);
   LCD.begin(16, 2);
-
-
-
 }
 
 void loop() {
@@ -64,7 +61,7 @@ void loop() {
  
   LCD.clear();
   
-   LCD.setCursor(0, 0);
+  LCD.setCursor(0, 0);
   LCD.print("dist. cm :"); // Print the massage
   LCD.setCursor(11, 0);
   LCD.print(cm); // Prints the distance in cm
