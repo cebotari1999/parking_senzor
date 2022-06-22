@@ -12,17 +12,16 @@ int duration;
 int distance;
 
 void setup() {
+  // Serial Port begin
   Serial.begin(9600);
   
-  // Se definesc inputurile/outputurile
+  // Define inputs and outputs
   pinMode(trig, OUTPUT);
   pinMode(echo, INPUT);
   pinMode(buzzer, OUTPUT);
 
- // Se seteaza contrastul LCD-ului.
+ // Initialize the LCD
   analogWrite(9, contrast);
-  
-  // Se initializeaza LCD-ul
   LCD.begin(16, 2);
 
 
@@ -30,40 +29,26 @@ void setup() {
 }
 
 void loop() {
-  /**
-   * Senzorul ultrasonic este activat de un semnal HIGH care dureaza,
-   * 10 sau mai multe microsecunde. Pentru ca acesta sa fie curat si
-   * datele obtinute cat mai corecte, se transmite un semnal LOW timp
-   * de 5 milisecunde.
-   * 
-   */
+  // The sensor is triggered by a HIGH pulse of 10 or more microseconds.
+  // Give a short LOW pulse beforehand to ensure a clean HIGH pulse:
   digitalWrite(trig, LOW);
   delayMicroseconds(5);
   digitalWrite(trig, HIGH);
   delayMicroseconds(10);
   digitalWrite(trig, LOW);
   
-  /**
-   * Se citeste durata de timp, in care undele sau propagat 
-   * de la senzor, spre obiect si inapoi.
-   */
+  // Read the signal from the sensor: a HIGH pulse whose
+  // duration is the time (in microseconds) from the sending
+  // of the ping to the reception of its echo off of an object.
   pinMode(echo, INPUT);
   duration = pulseIn(echo, HIGH);
 
-  /**
-   *  Se calculeaza distanta de la senzor la obiect 
-   *  in cm si inci
-   */
+  // Convert the time into a distance
   cm = (duration / 2) / 29.1;
   inches = (duration / 2) / 74;
 
- /**
-  * In functie de cat de aproape este obiectul,se transmit
-  * fregvente din ce in ce mai mare, astfel buzzerul
-  * va produce un sunet din ce in ce mai ascutit. Daca
-  * obiectul este mai departe de 30 cm, buzzerul nu 
-  * va mai emite sunete.
-  */
+ // The buzzer emits a sound. Frequency of sound depends it depends 
+  // on how close the object is 
   if (cm <= 5) {
     tone(buzzer, 400);
   }
@@ -76,21 +61,18 @@ void loop() {
     noTone(buzzer);
   }
 
-  
-  /**
-   * Se sterge textul vechi de pe ecran si se afiseaza 
-   * distanta in cm si inci.
-   */
+ 
   LCD.clear();
-  LCD.setCursor(0, 0);
-  LCD.print("dist. cm :");
-  LCD.setCursor(11, 0);
-  LCD.print(cm);
   
-  LCD.setCursor(0, 1);
-  LCD.print("dist. inch:");
+   LCD.setCursor(0, 0);
+  LCD.print("dist. cm :"); // Print the massage
+  LCD.setCursor(11, 0);
+  LCD.print(cm); // Prints the distance in cm
+  
+  LCD.setCursor(0, 1); 
+  LCD.print("dist. inch:"); // Print the massage
   LCD.setCursor(11, 1);
-  LCD.print(inches);
+  LCD.print(inches); // Prints the distance in meter
   
   delay(200);
 };
