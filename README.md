@@ -1,6 +1,6 @@
 Parking senzor
 
-This parking sensor detect the closest object in front of him, display the distance between object and sensor, if the distance is less then 30 cm, the buzzer makes a sound.
+This parking sensor detect the closest object in front of him, display the distance between object and sensor, if the distance is less than 30 cm, the buzzer makes a sound.
 
 Hardware components:
 - Breadboard;
@@ -10,7 +10,7 @@ Hardware components:
 - Resistors 100Ohm;
 
 
-This project contain a ultrasonic sensor to detect objects and to calculate the distance between object and senzor. After the distance is calculated, the buzzer makes a sound. The frequency of sounds grow when the distance decreases. The LCD display the distance. 
+This project contain a ultrasonic sensor to detect objects and to calculate the distance between object and sensor. After the distance is calculated, the buzzer makes a sound. The frequency of sounds grow when the distance decreases. The LCD display the distance. 
 
 Demo in tinkercad:
 https://www.tinkercad.com/things/3MG4Hc0YR5v-senzor-de-parcare/editel
